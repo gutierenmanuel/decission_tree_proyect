@@ -1,11 +1,6 @@
 import os
 import requests
 from urllib.parse import urlparse
-import pandas as pd
-import dataframe_image as dfi
-import seaborn as sns
-import matplotlib.pyplot as plt
-import math
 
 def descargar_archivo(url, carpeta_local='',nombre=None):
     try:
@@ -32,13 +27,14 @@ def descargar_archivo(url, carpeta_local='',nombre=None):
 
         print(f'Archivo descargado exitosamente en: {ruta_local}')
 
-    except requests.exceptions.RequestException as e:
+    except Exception as e:
         print(f'Error al descargar el archivo: {e}')
     
 
 
 ## ---
 
+import dataframe_image as dfi
 
 def dataframe_to_image(dataframe,ruta_imagen):
 
@@ -47,7 +43,8 @@ def dataframe_to_image(dataframe,ruta_imagen):
 
 ## ---
 
-
+import math
+import matplotlib.pyplot as plt
 
 def plot_categorical_histograms(dataframe, max_columns=3):
     # Obtén la lista de columnas categóricas
@@ -99,6 +96,7 @@ def plot_numerical_data(dataframe):
 
         # Crear una figura múltiple con histogramas y diagramas de caja
         sns.histplot(ax = axis[0],
+                     bins= 100,
                     data = total_data,
                     kde=True,
                     x = column).set(xlabel = None)
